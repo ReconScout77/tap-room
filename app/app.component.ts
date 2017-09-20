@@ -7,14 +7,14 @@ import { Keg } from './keg.model';
     <div class="container">
       <h1>{{title}}</h1>
 
-      <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)"></keg-list>
+      <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
       <hr>
 
-      <keg-details [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finished()"></keg-details>
+      <keg-details [childSelectedKeg]="selectedDetailsKeg" (doneButtonClickedSender)="finishedDetails()"></keg-details>
 
-      <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finished()"></edit-keg>
+      <edit-keg [childSelectedKeg]="selectedEditKeg" (doneButtonClickedSender)="finishedEdit()"></edit-keg>
 
-
+      <new-keg (newKegSender)="addKeg($event)"></new-keg>
 
     </div>
   `
@@ -23,7 +23,8 @@ import { Keg } from './keg.model';
 
 export class AppComponent {
   title: string = 'Tap Room';
-  selectedKeg: null;
+  selectedDetailsKeg: null;
+  selectedEditKeg: null;
 
   masterKegList: Keg[] = [
     new Keg('Bere', 'BereBere', 2.50, 0.06),
@@ -32,13 +33,25 @@ export class AppComponent {
   ];
 
   editKeg(clickedKeg) {
-    this.selectedKeg = clickedKeg;
+    this.selectedEditKeg = clickedKeg;
   }
 
-  finished() {
-    this.selectedKeg = null;
+  detailKeg(clickedKeg) {
+    this.selectedDetailsKeg = clickedKeg;
   }
 
+  finishedEdit() {
+    this.selectedEditKeg = null;
+  }
+
+  finishedDetails() {
+    this.selectedDetailsKeg = null;
+  }
+
+
+  addKeg(newKegFromChild: Keg) {
+    this.masterKegList.push(newKegFromChild);
+  }
   // onSelect(keg: Keg): void {
   //   this.selectedKeg = keg;
   // }

@@ -4,30 +4,42 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-list',
   template: `
+  <select (change)="onChange($event.target.value)">
+    <option value="allKegs">All Kegs</option>
+    <option value="emptyKegs">Empty Kegs</option>
+    <option value="almostEmptyKegs">Almost Empty Kegs</option>
+    <option value="fullKegs" selected="selected">Full Kegs</option>
+  </select>
+
   <ul>
-    <li [class]="alcoholContentColor(currentKeg)" (click)="isEmpty(currentKeg)" *ngFor="let currentKeg of childKegList">{{currentKeg.name}} <button (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button> <button (click)="editButtonHasBeenClicked(currentKeg)">Edit!</button></li>
+    <li [class]="alcoholContentColor(currentKeg)" *ngFor="let currentKeg of childKegList | fullness: filterByFullness">{{currentKeg.name}}
+    <label>Empty</label>
+    <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
+    <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/>
+    <button (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button>
+    <button (click)="editButtonHasBeenClicked(currentKeg)">Edit</button>
+    <button (click)="pintSold(currentKeg)">Pint Sold</button>
+    </li>
   </ul>
   `
 })
 
 export class KegListComponent {
   @Input() childKegList: Keg[];
-  @Output() clickSender = new EventEmitter();
+  @Output() clickSenderEdit = new EventEmitter();
+  @Output() clickSenderDetails = new EventEmitter();
+  @Output() clickSenderPints = new EventEmitter();
 
   editButtonHasBeenClicked(kegToEdit: Keg) {
-    this.clickSender.emit(kegToEdit);
+    this.clickSenderEdit.emit(kegToEdit);
   }
 
   detailsButtonHasBeenClicked(kegToSee: Keg) {
-    this.clickSender.emit(kegToSee);
+    this.clickSenderDetails.emit(kegToSee);
   }
 
-  isEmpty(clickedKeg: Keg) {
-    if(clickedKeg.empty) {
-      alert("Empty keg alert!");
-    } else {
-      alert("There's still more to sell in here.");
-    }
+  pintSold(currentKeg) {
+    currentKeg.pints -= 1;
   }
 
   alcoholContentColor(currentKeg) {
@@ -39,4 +51,15 @@ export class KegListComponent {
       return "bg-info";
     }
   }
+
+  filterByFullness: string = "fullKegs";
+
+  onChange(optionFromMenu) {
+    this.filterByFullness = optionFromMenu;
+  }
+
+  toggleDone(clickedKeg: Keg, setFullness: boolean) {
+    clickedKeg.empty = setFullness;
+  }
+
 }

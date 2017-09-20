@@ -6,18 +6,25 @@ import { Keg } from './keg.model';
   template: `
     <div>
       <div *ngIf="childSelectedKeg">
-        <h3>{{childSelectedKeg.name}}</h3>
-        <p>Keg Empty? {{childSelectedKeg.empty}}</p>
+        <h2>{{childSelectedKeg.name}}</h2>
         <hr>
         <h3>Edit Keg</h3>
-        <label>Enter Keg Name: </label>
-        <input [(ngModel)]="childSelectedKeg.name">
-        <label>Enter Keg Brand: </label>
-        <input [(ngModel)]="childSelectedKeg.brand">
-        <label>Enter Keg Pint Price: </label>
-        <input [(ngModel)]="childSelectedKeg.price">
-        <label>Enter Keg Alcohol Content: </label>
-        <input [(ngModel)]="childSelectedKeg.alcoholContent">
+        <div>
+          <label>Enter Keg Name: </label>
+          <input [(ngModel)]="childSelectedKeg.name">
+        </div>
+        <div>
+          <label>Enter Keg Brand: </label>
+          <input [(ngModel)]="childSelectedKeg.brand">
+        </div>
+        <div>
+          <label>Enter Keg Pint Price: </label>
+          <input [(ngModel)]="childSelectedKeg.price">
+        </div>
+        <div>
+          <label>Enter Keg Alcohol Content: </label>
+          <input [(ngModel)]="childSelectedKeg.alcoholContent">
+        </div>
         <button (click)="doneButtonClicked()">Done</button>
       </div>
     </div>

@@ -14,6 +14,9 @@ import { Keg } from './keg.model';
       <li><label>Brand: </label> {{childSelectedKeg.brand}}</li>
       <li><label>Price per pint: </label> {{childSelectedKeg.price}}</li>
       <li><label>Alcohol Content: </label> {{childSelectedKeg.alcoholContent}}</li>
+      <li><label>Pints Left: </label> {{childSelectedKeg.pints}}</li>
+      <li><label>Keg Empty? </label> {{childSelectedKeg.empty}}</li>
+
       <button (click)="doneButtonClicked()">Done</button>
     </div>
   `
