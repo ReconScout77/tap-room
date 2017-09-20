@@ -6,9 +6,20 @@ import { Keg } from './keg.model';
   template: `
     <div class="container">
       <h1>{{title}}</h1>
-
-      <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
-      <hr>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Empty</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Sell</th>
+          </tr>
+        </thead>
+        <tbody>
+          <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
+        </tbody>
+      </table>
 
       <keg-details [childSelectedKeg]="selectedDetailsKeg" (doneButtonClickedSender)="finishedDetails()"></keg-details>
 
@@ -31,6 +42,7 @@ export class AppComponent {
     new Keg('Juice', 'Snapple', 2, 0.01),
     new Keg('Wodka', 'SimplyAlcohol', 6, 0.5)
   ];
+
 
   editKeg(clickedKeg) {
     this.selectedEditKeg = clickedKeg;
