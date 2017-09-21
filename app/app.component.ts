@@ -6,20 +6,8 @@ import { Keg } from './keg.model';
   template: `
     <div class="container">
       <h1>{{title}}</h1>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Empty</th>
-            <th>Details</th>
-            <th>Edit</th>
-            <th>Sell</th>
-          </tr>
-        </thead>
-        <tbody>
-          <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
-        </tbody>
-      </table>
+
+      <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
 
       <keg-details [childSelectedKeg]="selectedDetailsKeg" (doneButtonClickedSender)="finishedDetails()"></keg-details>
 

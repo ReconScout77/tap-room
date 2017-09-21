@@ -10,16 +10,34 @@ import { Keg } from './keg.model';
     <option value="almostEmptyKegs">Almost Empty Kegs</option>
     <option value="fullKegs" selected="selected">Full Kegs</option>
   </select>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Empty</th>
+        <th>Details</th>
+        <th>Edit</th>
+        <th>Sell</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currentKeg of childKegList | fullness: filterByFullness"><th [class]="alcoholContentColor(currentKeg)">{{currentKeg.name}}</th>
+        <th [class]="priceColor(currentKeg)">{{currentKeg.price}}</th>
+        <th>
+        <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
+        <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/></th>
+        <th><button class="btn btn-default" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
+        <th><button class="btn btn-default" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
+        <th><button class="btn btn-default" (click)="pintSold(currentKeg)">Pint</button>
+        <button class="btn btn-default" (click)="growlerSold(currentKeg)">Growler</button>
+        <button class="btn btn-default" (click)="largeGrowlerSold(currentKeg)">Large Growler</button></th>
+        <th><button class="btn btn-default" (click)="restock(currentKeg)">Restock</button></th>
+      </tr>
+    </tbody>
+  </table>
 
-  
-    <tr [class]="alcoholContentColor(currentKeg)" *ngFor="let currentKeg of childKegList | fullness: filterByFullness">{{currentKeg.name}}
-    <th><label>Empty</label>
-    <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
-    <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/></th>
-    <th><button class="btn btn-default" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
-    <th><button class="btn btn-default" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
-    <th><button class="btn btn-default" (click)="pintSold(currentKeg)">Pint Sold</button></th>
-  </tr>
   `
 })
 
@@ -48,6 +66,39 @@ export class KegListComponent {
     }
   }
 
+  growlerSold(currentKeg) {
+    if (currentKeg.pints > 1) {
+      currentKeg.pints -= 2;
+      if(currentKeg.pints === 0) {
+        currentKeg.empty = true;
+      }
+    } else {
+      alert("There isn't enough in here to fill a growler.");
+    }
+  }
+
+  largeGrowlerSold(currentKeg) {
+    if (currentKeg.pints > 3) {
+      currentKeg.pints -= 4;
+      if(currentKeg.pints === 0) {
+        currentKeg.empty = true;
+      }
+    } else {
+      alert("There isn't enough in here to fill a large growler.");
+    }
+  }
+
+  restock(currentKeg) {
+    if (currentKeg.pints === 0) {
+      currentKeg.pints = 124;
+      currentKeg.empty = false;
+    } else if (currentKeg.pints === 124) {
+      alert("This keg is currently full and doesn't need to be restocked.");
+    } else {
+      alert("This doesn't need to be restocked yet. Sell the rest first.");
+    }
+  }
+
   alcoholContentColor(currentKeg) {
     if (currentKeg.alcoholContent > .4) {
       return "bg-danger";
@@ -55,6 +106,14 @@ export class KegListComponent {
       return "bg-warning";
     } else {
       return "bg-info";
+    }
+  }
+
+  priceColor(currentKeg) {
+    if (currentKeg.price > 6) {
+      return "bg-primary";
+    } else if (currentKeg.price > 4) {
+      return "bg-success";
     }
   }
 
