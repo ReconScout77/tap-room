@@ -4,30 +4,38 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'edit-keg',
   template: `
-    <div>
       <div *ngIf="childSelectedKeg">
-        <h2>{{childSelectedKeg.name}}</h2>
-        <hr>
-        <h3>Edit Keg</h3>
-        <div>
-          <label>Enter Keg Name: </label>
-          <input [(ngModel)]="childSelectedKeg.name">
+        <h1>Edit {{childSelectedKeg.name}}</h1>
+        <div class="well">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Price per pint</th>
+                <th>Alcohol Content</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>
+                  <input [(ngModel)]="childSelectedKeg.name">
+                </th>
+                <th>
+                  <input [(ngModel)]="childSelectedKeg.brand">
+                </th>
+                <th>
+                  <input [(ngModel)]="childSelectedKeg.price">
+                </th>
+                <th>
+                  <input [(ngModel)]="childSelectedKeg.alcoholContent">
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-lg btn-block" (click)="doneButtonClicked()">Done</button>
         </div>
-        <div>
-          <label>Enter Keg Brand: </label>
-          <input [(ngModel)]="childSelectedKeg.brand">
-        </div>
-        <div>
-          <label>Enter Keg Pint Price: </label>
-          <input [(ngModel)]="childSelectedKeg.price">
-        </div>
-        <div>
-          <label>Enter Keg Alcohol Content: </label>
-          <input [(ngModel)]="childSelectedKeg.alcoholContent">
-        </div>
-        <button class="btn btn-default" (click)="doneButtonClicked()">Done</button>
       </div>
-    </div>
   `
 })
 

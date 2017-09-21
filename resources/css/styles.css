@@ -1,3 +1,46 @@
+body {
+  margin: 2% 10% 2% 10%;
+}
+
+#title {
+  letter-spacing: 8px;
+  font-size: 100px;
+}
+
 h1 {
   text-align: center;
+  letter-spacing: 2px;
+}
+
+th {
+  text-align: center;
+}
+
+#filter {
+  padding-bottom: 2%;
+}
+
+select {
+  font-size: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+label {
+  font-size: 18px;
+}
+
+table {
+  font-size: 20px;
+}
+
+.well {
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+button {
+
 }

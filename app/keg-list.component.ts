@@ -4,39 +4,45 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-list',
   template: `
-  <select (change)="onChange($event.target.value)">
-    <option value="allKegs">All Kegs</option>
-    <option value="emptyKegs">Empty Kegs</option>
-    <option value="almostEmptyKegs">Almost Empty Kegs</option>
-    <option value="fullKegs" selected="selected">Full Kegs</option>
-  </select>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Empty</th>
-        <th>Details</th>
-        <th>Edit</th>
-        <th>Sell</th>
-        <th> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let currentKeg of childKegList | fullness: filterByFullness"><th [class]="alcoholContentColor(currentKeg)">{{currentKeg.name}}</th>
-        <th [class]="priceColor(currentKeg)">{{currentKeg.price}}</th>
-        <th>
-        <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
-        <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/></th>
-        <th><button class="btn btn-default" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
-        <th><button class="btn btn-default" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
-        <th><button class="btn btn-default" (click)="pintSold(currentKeg)">Pint</button>
-        <button class="btn btn-default" (click)="growlerSold(currentKeg)">Growler</button>
-        <button class="btn btn-default" (click)="largeGrowlerSold(currentKeg)">Large Growler</button></th>
-        <th><button class="btn btn-default" (click)="restock(currentKeg)">Restock</button></th>
-      </tr>
-    </tbody>
-  </table>
+  <div id="filter">
+    <label>Filter by: </label>
+    <select (change)="onChange($event.target.value)">
+      <option value="allKegs">All Kegs</option>
+      <option value="emptyKegs">Empty Kegs</option>
+      <option value="almostEmptyKegs">Almost Empty Kegs</option>
+      <option value="fullKegs" selected="selected">Full Kegs</option>
+    </select>
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Empty</th>
+          <th>Details</th>
+          <th>Edit</th>
+          <th>Sell</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let currentKeg of childKegList | fullness: filterByFullness"><th [class]="alcoholContentColor(currentKeg)">{{currentKeg.name}}</th>
+          <th><span [class]="priceColor(currentKeg)">{{currentKeg.price}}</span></th>
+          <th>
+          <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
+          <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/></th>
+          <th><button class="btn btn-default" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
+          <th><button class="btn btn-default" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
+          <th><button class="btn btn-default" (click)="pintSold(currentKeg)">Pint</button>
+          <button class="btn btn-default" (click)="growlerSold(currentKeg)">Growler</button>
+          <button class="btn btn-default" (click)="largeGrowlerSold(currentKeg)">Large Growler</button></th>
+          <th><button class="btn btn-default" (click)="restock(currentKeg)">Restock</button></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   `
 })
@@ -45,7 +51,6 @@ export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSenderEdit = new EventEmitter();
   @Output() clickSenderDetails = new EventEmitter();
-  @Output() clickSenderPints = new EventEmitter();
 
   editButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSenderEdit.emit(kegToEdit);
@@ -111,9 +116,11 @@ export class KegListComponent {
 
   priceColor(currentKeg) {
     if (currentKeg.price > 6) {
-      return "bg-primary";
+      return "badge badge-danger";
     } else if (currentKeg.price > 4) {
-      return "bg-success";
+      return "badge badge-warning";
+    } else {
+      return "badge badge-info";
     }
   }
 

@@ -6,18 +6,42 @@ import { Keg } from './keg.model';
   selector: 'keg-details',
   template: `
 
-    <ul>
-      <li *ngFor="let currentKeg of childKegList" (click)="onSelect(keg)" [class.selected]="keg === childSelectedKeg">{{keg.name}}</li>
-    </ul>
-    <div *ngIf="childSelectedKeg">
-      <h2>{{childSelectedKeg.name}} details</h2>
-      <li><label>Brand: </label> {{childSelectedKeg.brand}}</li>
-      <li><label>Price per pint: </label> {{childSelectedKeg.price}}</li>
-      <li><label>Alcohol Content: </label> {{childSelectedKeg.alcoholContent}}</li>
-      <li><label>Pints Left: </label> {{childSelectedKeg.pints}}</li>
-      <li><label>Keg Empty? </label> {{childSelectedKeg.empty}}</li>
 
-      <button (click)="doneButtonClicked()">Done</button>
+    <div *ngIf="childSelectedKeg">
+      <h1>{{childSelectedKeg.name}} Details</h1>
+      <div class="well">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Price per pint</th>
+              <th>Alcohol Content</th>
+              <th>Pints Available</th>
+              <th>Empty?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                {{childSelectedKeg.brand}}
+              </th>
+              <th>
+                {{childSelectedKeg.price}}
+              </th>
+              <th>
+                {{childSelectedKeg.alcoholContent}}
+              </th>
+              <th>
+                {{childSelectedKeg.pints}}
+              </th>
+              <th>
+                {{childSelectedKeg.empty}}
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-lg btn-block" (click)="doneButtonClicked()">Done</button>
+      </div>
     </div>
   `
   })

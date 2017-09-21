@@ -4,16 +4,18 @@ import { Keg } from './keg.model';
 @Component ({
   selector: 'app-root',
   template: `
-    <div class="container">
-      <h1>{{title}}</h1>
+    <div class="container-fluid">
+    <div class="jumbotron">
+      <h1 id=title>{{title}}</h1>
+    </div>
 
       <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
+
+      <new-keg (newKegSender)="addKeg($event)"></new-keg>
 
       <keg-details [childSelectedKeg]="selectedDetailsKeg" (doneButtonClickedSender)="finishedDetails()"></keg-details>
 
       <edit-keg [childSelectedKeg]="selectedEditKeg" (doneButtonClickedSender)="finishedEdit()"></edit-keg>
-
-      <new-keg (newKegSender)="addKeg($event)"></new-keg>
 
     </div>
   `
@@ -48,11 +50,8 @@ export class AppComponent {
     this.selectedDetailsKeg = null;
   }
 
-
   addKeg(newKegFromChild: Keg) {
     this.masterKegList.push(newKegFromChild);
   }
-  // onSelect(keg: Keg): void {
-  //   this.selectedKeg = keg;
-  // }
+
 }
