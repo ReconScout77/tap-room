@@ -40,7 +40,7 @@ import { Keg } from './keg.model';
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-lg btn-block" (click)="doneButtonClicked()">Done</button>
+        <button class="btn btn-success btn-lg btn-block" (click)="doneButtonClicked()">Done</button>
       </div>
     </div>
   `

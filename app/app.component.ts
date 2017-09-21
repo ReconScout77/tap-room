@@ -6,7 +6,7 @@ import { Keg } from './keg.model';
   template: `
     <div class="container-fluid">
     <div class="jumbotron">
-      <h1 id=title>{{title}}</h1>
+      <h1 id=title><img src="./resources/img/Bar.png"> </h1>
     </div>
 
       <keg-list [childKegList]="masterKegList" (clickSenderEdit)="editKeg($event)" (clickSenderDetails)="detailKeg($event)" ></keg-list>
@@ -28,9 +28,10 @@ export class AppComponent {
   selectedEditKeg: null;
 
   masterKegList: Keg[] = [
-    new Keg('Bere', 'BereBere', 2.50, 0.06),
+    new Keg('Bere', 'BereBere', 5, 0.3),
     new Keg('Juice', 'Snapple', 2, 0.01),
     new Keg('Wodka', 'SimplyAlcohol', 6, 0.5)
+    new Keg('Blue Moon', 'Miller Coors', 6, 0.054)
   ];
 
 

@@ -4,22 +4,34 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-list',
   template: `
-  <div id="filter">
-    <label>Filter by: </label>
-    <select (change)="onChange($event.target.value)">
-      <option value="allKegs">All Kegs</option>
-      <option value="emptyKegs">Empty Kegs</option>
-      <option value="almostEmptyKegs">Almost Empty Kegs</option>
-      <option value="fullKegs" selected="selected">Full Kegs</option>
-    </select>
+  <div class="row">
+    <div class="col-md-3">
+      <div id="filter">
+        <label>Filter by: </label>
+        <select (change)="onChange($event.target.value)">
+          <option value="allKegs">All Kegs</option>
+          <option value="emptyKegs">Empty Kegs</option>
+          <option value="almostEmptyKegs">Almost Empty Kegs</option>
+          <option value="fullKegs" selected="selected">Full Kegs</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h1 id="inventory">Inventory</h1>
+    </div>
+    <div class="col-md-3">
+    </div>
   </div>
 
   <div>
-    <table class="table table-striped">
+    <table class="table" id="main-table">
       <thead>
         <tr>
           <th>Name</th>
+          <th>Brand</th>
           <th>Price</th>
+          <th>ABV</th>
           <th>Empty</th>
           <th>Details</th>
           <th>Edit</th>
@@ -28,17 +40,20 @@ import { Keg } from './keg.model';
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let currentKeg of childKegList | fullness: filterByFullness"><th [class]="alcoholContentColor(currentKeg)">{{currentKeg.name}}</th>
+        <tr *ngFor="let currentKeg of childKegList | fullness: filterByFullness">
+          <th>{{currentKeg.name}}</th>
+          <th>{{currentKeg.brand}}</th>
           <th><span [class]="priceColor(currentKeg)">{{currentKeg.price}}</span></th>
+          <th><span [class]="alcoholContentColor(currentKeg)">{{currentKeg.alcoholContent}}</span></th>
           <th>
           <input *ngIf="currentKeg.empty === true" type="checkbox" checked (click)="toggleDone(currentKeg, false)"/>
           <input *ngIf="currentKeg.empty === false" type="checkbox" (click)="toggleDone(currentKeg, true)"/></th>
-          <th><button class="btn btn-default" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
-          <th><button class="btn btn-default" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
-          <th><button class="btn btn-default" (click)="pintSold(currentKeg)">Pint</button>
-          <button class="btn btn-default" (click)="growlerSold(currentKeg)">Growler</button>
-          <button class="btn btn-default" (click)="largeGrowlerSold(currentKeg)">Large Growler</button></th>
-          <th><button class="btn btn-default" (click)="restock(currentKeg)">Restock</button></th>
+          <th><button class="btn btn-success" (click)="detailsButtonHasBeenClicked(currentKeg)">Details</button></th>
+          <th><button class="btn btn-success" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></th>
+          <th><button class="btn btn-success" (click)="pintSold(currentKeg)">Pint</button>
+          <button class="btn btn-success" (click)="growlerSold(currentKeg)">Growler</button>
+          <button class="btn btn-success" (click)="largeGrowlerSold(currentKeg)">Large Growler</button></th>
+          <th><button class="btn btn-success" (click)="restock(currentKeg)">Restock</button></th>
         </tr>
       </tbody>
     </table>
@@ -106,16 +121,16 @@ export class KegListComponent {
 
   alcoholContentColor(currentKeg) {
     if (currentKeg.alcoholContent > .4) {
-      return "bg-danger";
+      return "badge badge-danger";
     } else if (currentKeg.alcoholContent >.25) {
-      return "bg-warning";
+      return "badge badge-warning";
     } else {
-      return "bg-info";
+      return "badge badge-info";
     }
   }
 
   priceColor(currentKeg) {
-    if (currentKeg.price > 6) {
+    if (currentKeg.price > 5) {
       return "badge badge-danger";
     } else if (currentKeg.price > 4) {
       return "badge badge-warning";

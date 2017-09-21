@@ -1,15 +1,23 @@
 body {
   margin: 2% 10% 2% 10%;
+  background-color: #A1A8B0;
 }
 
 #title {
   letter-spacing: 8px;
   font-size: 100px;
+  color: #00133E;
+}
+
+.jumbotron {
+  background-color: #57C40F;
 }
 
 h1 {
   text-align: center;
   letter-spacing: 2px;
+  color: #00133E;
+  font-size: 55px;
 }
 
 th {
@@ -30,17 +38,47 @@ li {
 
 label {
   font-size: 18px;
+  color: #00133E;
 }
 
-table {
+#main-table {
+  background-color: #00133E;
+  color: #ffffff;
+}
+
+.well table {
   font-size: 20px;
+  color: #ffffff;
+}
+
+input {
+  color: #000000;
 }
 
 .well {
   text-align: center;
   margin-bottom: 2%;
+  background-color: #00133E;
+  color: #ffffff;
 }
 
-button {
+.badge-danger {
+  background-color: #18af1b;
+}
 
+.badge-warning {
+  background-color: #ff970f;
+}
+
+.badge-info {
+  background-color: #ef2525;
+}
+
+.btn {
+  background-color: #57C40F;
+  color: #ffffff;
+}
+
+img {
+  width: 30%;
 }

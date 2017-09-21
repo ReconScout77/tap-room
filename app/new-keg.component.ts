@@ -4,7 +4,7 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'new-keg',
   template: `
-    <button class="btn btn-default" (click)="show=!show">New Keg</button>
+    <button class="btn btn-success btn-lg" (click)="show=!show">New Keg</button>
 
     <div *ngIf="show">
       <h1>New Keg</h1>
@@ -35,7 +35,7 @@ import { Keg } from './keg.model';
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-lg btn-block" (click)="submitForm(newName.value, newBrand.value, newPrice.value, newAlcoholContent.value); newName.value=' '; newBrand.value=' '; newPrice.value=' '; newAlcoholContent.value=' '; show=!show">Add</button>
+        <button class="btn btn-success btn-lg btn-block" (click)="submitForm(newName.value, newBrand.value, newPrice.value, newAlcoholContent.value); newName.value=' '; newBrand.value=' '; newPrice.value=' '; newAlcoholContent.value=' '; show=!show">Add</button>
       </div>
     </div>
 
