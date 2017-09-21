@@ -21,6 +21,9 @@ import { Keg } from './keg.model';
       <h1 id="inventory">Inventory</h1>
     </div>
     <div class="col-md-3">
+      <label>Happy Hour</label>
+      <input *ngIf="true" type="checkbox"  (click)="toggleHappy(childKegList, false)"/>
+      <input *ngIf="false" type="checkbox" (click)="toggleHappy(childKegList, true)"/>
     </div>
   </div>
 
@@ -32,6 +35,7 @@ import { Keg } from './keg.model';
           <th>Brand</th>
           <th>Price</th>
           <th>ABV</th>
+          <th>
           <th>Empty</th>
           <th>Details</th>
           <th>Edit</th>
@@ -148,5 +152,18 @@ export class KegListComponent {
   toggleDone(clickedKeg: Keg, setFullness: boolean) {
     clickedKeg.empty = setFullness;
   }
+
+  toggleHappy(childKegList: Keg[], happyHour: boolean) {
+    if (happyHour = true) {
+      for(let i = 0; i < childKegList.length; i++) {
+        childKegList[i].price * .75;
+      }
+    } else {
+      for(let i = 0; i < childKegList.length; i++) {
+        childKegList[i].price / .75;
+      }
+    }
+  }
+
 
 }

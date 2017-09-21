@@ -30,7 +30,7 @@ export class AppComponent {
   masterKegList: Keg[] = [
     new Keg('Bere', 'BereBere', 5, 0.3),
     new Keg('Juice', 'Snapple', 2, 0.01),
-    new Keg('Wodka', 'SimplyAlcohol', 6, 0.5)
+    new Keg('Wodka', 'SimplyAlcohol', 6, 0.5),
     new Keg('Blue Moon', 'Miller Coors', 6, 0.054)
   ];
 

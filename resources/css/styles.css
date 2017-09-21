@@ -30,6 +30,7 @@ th {
 
 select {
   font-size: 18px;
+  color: #00133E;
 }
 
 li {
@@ -37,13 +38,14 @@ li {
 }
 
 label {
-  font-size: 18px;
+  font-size: 20px;
   color: #00133E;
 }
 
 #main-table {
   background-color: #00133E;
   color: #ffffff;
+  font-size: 18px;
 }
 
 .well table {
@@ -52,7 +54,8 @@ label {
 }
 
 input {
-  color: #000000;
+  color: #00133E;
+  text-align: center;
 }
 
 .well {
